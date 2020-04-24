@@ -68,12 +68,6 @@ extension Data: JSONEncodable {
     }
 }
 
-extension Date: JSONEncodable {
-    func encodeToJSON() -> Any {
-        return CodableHelper.dateFormatter.string(from: self) as Any
-    }
-}
-
 extension URL: JSONEncodable {
     func encodeToJSON() -> Any {
         return self
