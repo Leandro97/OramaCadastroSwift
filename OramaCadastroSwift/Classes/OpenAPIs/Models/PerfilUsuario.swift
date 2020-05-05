@@ -98,12 +98,12 @@ import Foundation
     /** Nome do pai do usuário.   - É obrigatório caso o usuário não possua pai desconhecido. */
     public var nomePai: String?
     /** Se o usuário não possui Nome do Pai nos documentos. */
-    public var paiDesconhecido: Bool? = false
+    public var paiDesconhecido: Bool = false
     public var paiDesconhecidoNum: NSNumber? {
         get {
             return paiDesconhecido as NSNumber?
         }
-    }
+    }   
     public var login: LoginObjeto?
     public var documento: [Documento]?
     public var profissao: DadosProfissionais?
@@ -113,6 +113,7 @@ import Foundation
     public var frontEnd: FrontEndStep?
 
     public init(usPerson: Bool?, politicamenteExposto: Bool?, investidorQualificado: Bool?, nacionalidade: Nacionalidade?, ufNascimento: UfNascimento?, cidadeNascimento: String?, paisNascimento: String?, sexo: Sexo?, estadoCivil: EstadoCivil?, nomeConjuge: String?, nomeMae: String?, nomePai: String?, paiDesconhecido: Bool?, login: LoginObjeto?, documento: [Documento]?, profissao: DadosProfissionais?, endereco: Endereco?, patrimonio: DadosPatrimonial?, contaBancaria: [ContaBancaria]?, frontEnd: FrontEndStep?) {
+
         self.usPerson = usPerson
         self.politicamenteExposto = politicamenteExposto
         self.investidorQualificado = investidorQualificado
