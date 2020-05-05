@@ -98,7 +98,7 @@ import Foundation
     /** Nome do pai do usuário.   - É obrigatório caso o usuário não possua pai desconhecido. */
     public var nomePai: String?
     /** Se o usuário não possui Nome do Pai nos documentos. */
-    public var paiDesconhecido: Bool = false
+    public var paiDesconhecido: Bool? = false
     public var paiDesconhecidoNum: NSNumber? {
         get {
             return paiDesconhecido as NSNumber?
