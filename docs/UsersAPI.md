@@ -5,6 +5,9 @@ All URIs are relative to *https://cadastro.orama.com.br/api/contas/v3.0*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**accountAutenticacaoPost**](UsersAPI.md#accountautenticacaopost) | **POST** /autenticacao/ | Autentica um usuário que ainda não é cliente.
+[**accountAutenticacaoRedefinirSenhaConfirmarSmsPost**](UsersAPI.md#accountautenticacaoredefinirsenhaconfirmarsmspost) | **POST** /autenticacao/redefinir-senha/confirmar-sms | Confirmação do código para redefinição de senha
+[**accountAutenticacaoRedefinirSenhaNovaSenhaPost**](UsersAPI.md#accountautenticacaoredefinirsenhanovasenhapost) | **POST** /autenticacao/redefinir-senha/nova-senha | Salvar nova senha
+[**accountAutenticacaoRedefinirSenhaPost**](UsersAPI.md#accountautenticacaoredefinirsenhapost) | **POST** /autenticacao/redefinir-senha | Solicitar início da redefinição de senha
 [**accountDocumentoConfirmacaoGet**](UsersAPI.md#accountdocumentoconfirmacaoget) | **GET** /perfil/{cpf}/documento/confirmacao/ | Consulta o status de confirmação do documento que foi submetido
 [**accountDocumentoPut**](UsersAPI.md#accountdocumentoput) | **PUT** /perfil/{cpf}/documento/ | Anexa ou atualiza documento para conferencia de autenticidade do perfil.
 [**accountIdentificacaoPost**](UsersAPI.md#accountidentificacaopost) | **POST** /identificacao/ | Cria um login para usuário.
@@ -70,6 +73,156 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [JWT](../README.md#JWT)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **accountAutenticacaoRedefinirSenhaConfirmarSmsPost**
+```swift
+    open class func accountAutenticacaoRedefinirSenhaConfirmarSmsPost(confirmacaoCodigoSMS: ConfirmacaoCodigoSMS? = nil, completion: @escaping (_ data: ConfirmacaoCodigoSMS?, _ error: Error?) -> Void)
+```
+
+Confirmação do código para redefinição de senha
+
+Confirmação do código para redefinição de senha  - O código recebido via SMS deve ser enviado junto as informações do usuário  - Se o usuário errar o código 3 vezes a solicitação para redefinição de senha será cancelada
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import OramaCadastroSwift
+
+let confirmacaoCodigoSMS = ConfirmacaoCodigoSMS(cpf: "cpf_example", email: "email_example", codigo: "codigo_example") // ConfirmacaoCodigoSMS |  (optional)
+
+// Confirmação do código para redefinição de senha
+UsersAPI.accountAutenticacaoRedefinirSenhaConfirmarSmsPost(confirmacaoCodigoSMS: confirmacaoCodigoSMS) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **confirmacaoCodigoSMS** | [**ConfirmacaoCodigoSMS**](ConfirmacaoCodigoSMS.md) |  | [optional] 
+
+### Return type
+
+[**ConfirmacaoCodigoSMS**](ConfirmacaoCodigoSMS.md)
+
+### Authorization
+
+[Api-Key](../README.md#Api-Key), [JWT](../README.md#JWT)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **accountAutenticacaoRedefinirSenhaNovaSenhaPost**
+```swift
+    open class func accountAutenticacaoRedefinirSenhaNovaSenhaPost(envioNovaSenha: EnvioNovaSenha? = nil, completion: @escaping (_ data: RetornoNovaSenha?, _ error: Error?) -> Void)
+```
+
+Salvar nova senha
+
+Salvar nova senha  - A alteração só será confirmada caso o usuário tenha informado o código recebido via SMS
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import OramaCadastroSwift
+
+let envioNovaSenha = EnvioNovaSenha(senha: "senha_example") // EnvioNovaSenha | Dados para criação do login (optional)
+
+// Salvar nova senha
+UsersAPI.accountAutenticacaoRedefinirSenhaNovaSenhaPost(envioNovaSenha: envioNovaSenha) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **envioNovaSenha** | [**EnvioNovaSenha**](EnvioNovaSenha.md) | Dados para criação do login | [optional] 
+
+### Return type
+
+[**RetornoNovaSenha**](RetornoNovaSenha.md)
+
+### Authorization
+
+[Api-Key](../README.md#Api-Key), [JWT](../README.md#JWT)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **accountAutenticacaoRedefinirSenhaPost**
+```swift
+    open class func accountAutenticacaoRedefinirSenhaPost(solicitacaoRedefinicaoSenha: SolicitacaoRedefinicaoSenha? = nil, completion: @escaping (_ data: RetornoSolicitacaoRedefinicaoSenha?, _ error: Error?) -> Void)
+```
+
+Solicitar início da redefinição de senha
+
+Solicitar início da redefinição de senha  - Após solicitar a redefinição de senha um código será enviado através de SMS  - O código SMS expira após 15 minutos
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import OramaCadastroSwift
+
+let solicitacaoRedefinicaoSenha = SolicitacaoRedefinicaoSenha(cpf: "cpf_example", email: "email_example", dataNascimento: Date()) // SolicitacaoRedefinicaoSenha | Dados para criação do login (optional)
+
+// Solicitar início da redefinição de senha
+UsersAPI.accountAutenticacaoRedefinirSenhaPost(solicitacaoRedefinicaoSenha: solicitacaoRedefinicaoSenha) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **solicitacaoRedefinicaoSenha** | [**SolicitacaoRedefinicaoSenha**](SolicitacaoRedefinicaoSenha.md) | Dados para criação do login | [optional] 
+
+### Return type
+
+[**RetornoSolicitacaoRedefinicaoSenha**](RetornoSolicitacaoRedefinicaoSenha.md)
+
+### Authorization
+
+[Api-Key](../README.md#Api-Key), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -678,7 +831,7 @@ Name | Type | Description  | Notes
 
 # **accountPerfilGet**
 ```swift
-    open class func accountPerfilGet(cpf: String, campos: String? = nil, completion: @escaping (_ data: PerfilUsuario?, _ error: Error?) -> Void)
+    open class func accountPerfilGet(cpf: String, campos: String? = nil, completion: @escaping (_ data: RetornoPerfilUsuario?, _ error: Error?) -> Void)
 ```
 
 Retorna o perfil de um usuário que ainda não foi transformado em cliente.
@@ -713,7 +866,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PerfilUsuario**](PerfilUsuario.md)
+[**RetornoPerfilUsuario**](RetornoPerfilUsuario.md)
 
 ### Authorization
 
