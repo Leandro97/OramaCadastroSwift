@@ -10,7 +10,7 @@ import Foundation
 /** Dados profissionais do usuário */
 
 @objc public class DadosProfissionais: NSObject, Codable {
-
+    
     /** Profissão de acordo com a tabela de ocupação profissional */
     public var profissao: String?
     /** Nome da empresa em que trabalha o usuário.  - É obrigatório caso o usuário esteja empregado. */
@@ -22,11 +22,11 @@ import Foundation
             return empregado as NSNumber?
         }
     }
-
+    
     public init(profissao: String?, empresa: String?, empregado: Bool?) {
         self.profissao = profissao
         self.empresa = empresa
         self.empregado = empregado
     }
-
+    
 }

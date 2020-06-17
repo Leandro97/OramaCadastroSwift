@@ -9,8 +9,8 @@ import Foundation
 
 /** Documentação do Usuário. Deve ser enviado somente um documento na lista de documentos &#39;documento&#39;. */
 
-@objc public class Documento: NSObject, Codable { 
-
+@objc public class Documento:NSObject, Codable {
+    
     public enum TipoDocumento: String, Codable {
         case carteiraDeHabilitaçãoCnh = "Carteira de Habilitação - CNH"
         case passaporte = "Passaporte"
@@ -47,20 +47,20 @@ import Foundation
         case outrosExpedidores = "Outros Expedidores"
         case ssp = "SSP"
     }
-    public var tipoDocumento: TipoDocumento
-    public var numeroDocumento: String
+    public var tipoDocumento: TipoDocumento?
+    public var numeroDocumento: String?
     /** Orgão expedidor de acordo com o tipo de documento */
-    public var orgaoExpedidor: OrgaoExpedidor
+    public var orgaoExpedidor: OrgaoExpedidor?
     /** Unidade da Federação onde foi emitido o documeto */
-    public var ufEmissao: String
+    public var ufEmissao: String?
     /** Data em que o documento foi emitido no formato YYYY-MM-DD (cf. RFC 3339, section 5.8) */
-    public var dataEmissao: Date
+    public var dataEmissao: Date?
     /** Data de validade do documento no formato YYYY-MM-DD (cf. RFC 3339, section 5.8) */
     public var dataValidade: Date?
     /** Código de Segurança da Carteira Nacional de Habilitação  - Obrigatório caso &#39;tipoDocumento&#39; seja &#39;Carteira de Habilitação - CNH&#39; */
     public var codigoSegurancaCNH: String?
-
-    public init(tipoDocumento: TipoDocumento, numeroDocumento: String, orgaoExpedidor: OrgaoExpedidor, ufEmissao: String, dataEmissao: Date, dataValidade: Date?, codigoSegurancaCNH: String?) {
+    
+    public init(tipoDocumento: TipoDocumento?, numeroDocumento: String?, orgaoExpedidor: OrgaoExpedidor?, ufEmissao: String?, dataEmissao: Date?, dataValidade: Date?, codigoSegurancaCNH: String?) {
         self.tipoDocumento = tipoDocumento
         self.numeroDocumento = numeroDocumento
         self.orgaoExpedidor = orgaoExpedidor
@@ -69,5 +69,5 @@ import Foundation
         self.dataValidade = dataValidade
         self.codigoSegurancaCNH = codigoSegurancaCNH
     }
-
+    
 }
