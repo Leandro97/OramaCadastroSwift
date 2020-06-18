@@ -125,34 +125,34 @@ extension OramaCadastroSwiftAPI {
      - parameter solicitacaoRedefinicaoSenha: (body) Dados para criação do login (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func accountAutenticacaoRedefinirSenhaPost(solicitacaoRedefinicaoSenha: SolicitacaoRedefinicaoSenha? = nil, completion: @escaping ((_ data: SolicitacaoRedefinicaoSenha?,_ error: Error?) -> Void)) {
+    open class func accountAutenticacaoRedefinirSenhaPost(solicitacaoRedefinicaoSenha: SolicitacaoRedefinicaoSenha? = nil, completion: @escaping ((_ data: RetornoSolicitacaoRedefinicaoSenha?,_ error: Error?) -> Void)) {
         accountAutenticacaoRedefinirSenhaPostWithRequestBuilder(solicitacaoRedefinicaoSenha: solicitacaoRedefinicaoSenha).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
-
+    
     /**
      Solicitar início da redefinição de senha
      - POST /autenticacao/redefinir-senha
      - Solicitar início da redefinição de senha  - Após solicitar a redefinição de senha um código será enviado através de SMS  - O código SMS expira após 15 minutos
      - API Key:
-       - type: apiKey X-Api-Key 
-       - name: Api-Key
+     - type: apiKey X-Api-Key
+     - name: Api-Key
      - BASIC:
-       - type: http
-       - name: JWT
+     - type: http
+     - name: JWT
      - parameter solicitacaoRedefinicaoSenha: (body) Dados para criação do login (optional)
-     - returns: RequestBuilder<SolicitacaoRedefinicaoSenha>
+     - returns: RequestBuilder<RetornoSolicitacaoRedefinicaoSenha>
      */
-    open class func accountAutenticacaoRedefinirSenhaPostWithRequestBuilder(solicitacaoRedefinicaoSenha: SolicitacaoRedefinicaoSenha? = nil) -> RequestBuilder<SolicitacaoRedefinicaoSenha> {
+    open class func accountAutenticacaoRedefinirSenhaPostWithRequestBuilder(solicitacaoRedefinicaoSenha: SolicitacaoRedefinicaoSenha? = nil) -> RequestBuilder<RetornoSolicitacaoRedefinicaoSenha> {
         let path = "/autenticacao/redefinir-senha"
         let URLString = OramaCadastroSwiftAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: solicitacaoRedefinicaoSenha)
-
+        
         let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<SolicitacaoRedefinicaoSenha>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
+        
+        let requestBuilder: RequestBuilder<RetornoSolicitacaoRedefinicaoSenha>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+        
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
