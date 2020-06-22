@@ -27,6 +27,10 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DevelopersAPI* | [**accountIdentificacaoParceiroPost**](docs/DevelopersAPI.md#accountidentificacaoparceiropost) | **POST** /identificacao-parceiro/ | Cria um login para usuário.
 *UsersAPI* | [**accountAutenticacaoPost**](docs/UsersAPI.md#accountautenticacaopost) | **POST** /autenticacao/ | Autentica um usuário que ainda não é cliente.
+*UsersAPI* | [**accountAutenticacaoRedefinirSenhaConfirmarSmsPost**](docs/UsersAPI.md#accountautenticacaoredefinirsenhaconfirmarsmspost) | **POST** /autenticacao/redefinir-senha/confirmar-sms | Confirmação do código para redefinição de senha
+*UsersAPI* | [**accountAutenticacaoRedefinirSenhaEnviarSmsPost**](docs/UsersAPI.md#accountautenticacaoredefinirsenhaenviarsmspost) | **POST** /autenticacao/redefinir-senha/enviar-sms | Solicitar envio do código para redefinição de senha via SMS
+*UsersAPI* | [**accountAutenticacaoRedefinirSenhaNovaSenhaPost**](docs/UsersAPI.md#accountautenticacaoredefinirsenhanovasenhapost) | **POST** /autenticacao/redefinir-senha/nova-senha | Salvar nova senha
+*UsersAPI* | [**accountAutenticacaoRedefinirSenhaPost**](docs/UsersAPI.md#accountautenticacaoredefinirsenhapost) | **POST** /autenticacao/redefinir-senha | Solicitar início da redefinição de senha
 *UsersAPI* | [**accountDocumentoConfirmacaoGet**](docs/UsersAPI.md#accountdocumentoconfirmacaoget) | **GET** /perfil/{cpf}/documento/confirmacao/ | Consulta o status de confirmação do documento que foi submetido
 *UsersAPI* | [**accountDocumentoPut**](docs/UsersAPI.md#accountdocumentoput) | **PUT** /perfil/{cpf}/documento/ | Anexa ou atualiza documento para conferencia de autenticidade do perfil.
 *UsersAPI* | [**accountIdentificacaoPost**](docs/UsersAPI.md#accountidentificacaopost) | **POST** /identificacao/ | Cria um login para usuário.
@@ -54,6 +58,7 @@ Class | Method | HTTP request | Description
  - [AssinaturaEletronica](docs/AssinaturaEletronica.md)
  - [AutenticacaoCodigoObjeto](docs/AutenticacaoCodigoObjeto.md)
  - [AutenticacaoObjeto](docs/AutenticacaoObjeto.md)
+ - [ConfirmacaoCodigoSMS](docs/ConfirmacaoCodigoSMS.md)
  - [Confirmado](docs/Confirmado.md)
  - [ContaBancaria](docs/ContaBancaria.md)
  - [DadosPatrimonial](docs/DadosPatrimonial.md)
@@ -61,13 +66,27 @@ Class | Method | HTTP request | Description
  - [Documento](docs/Documento.md)
  - [DocumentoCorpo](docs/DocumentoCorpo.md)
  - [Endereco](docs/Endereco.md)
+ - [EnvioNovaSenha](docs/EnvioNovaSenha.md)
  - [Erro](docs/Erro.md)
  - [FrontEndStep](docs/FrontEndStep.md)
  - [ListaPerfilUsuario](docs/ListaPerfilUsuario.md)
  - [LoginCriado](docs/LoginCriado.md)
  - [LoginObjeto](docs/LoginObjeto.md)
+ - [LoginRedefinicaoSenha](docs/LoginRedefinicaoSenha.md)
  - [LoginSenhaObjeto](docs/LoginSenhaObjeto.md)
+ - [NovaSenha](docs/NovaSenha.md)
+ - [Pendencia](docs/Pendencia.md)
  - [PerfilUsuario](docs/PerfilUsuario.md)
+ - [RetornoContaBancaria](docs/RetornoContaBancaria.md)
+ - [RetornoDadosPatrimonial](docs/RetornoDadosPatrimonial.md)
+ - [RetornoDadosProfissionais](docs/RetornoDadosProfissionais.md)
+ - [RetornoDocumento](docs/RetornoDocumento.md)
+ - [RetornoEndereco](docs/RetornoEndereco.md)
+ - [RetornoLoginObjeto](docs/RetornoLoginObjeto.md)
+ - [RetornoNovaSenha](docs/RetornoNovaSenha.md)
+ - [RetornoPerfilUsuario](docs/RetornoPerfilUsuario.md)
+ - [RetornoSolicitacaoRedefinicaoSenha](docs/RetornoSolicitacaoRedefinicaoSenha.md)
+ - [SolicitacaoRedefinicaoSenha](docs/SolicitacaoRedefinicaoSenha.md)
  - [Submetido](docs/Submetido.md)
  - [Termos](docs/Termos.md)
  - [UsuarioSenhaObjeto](docs/UsuarioSenhaObjeto.md)
