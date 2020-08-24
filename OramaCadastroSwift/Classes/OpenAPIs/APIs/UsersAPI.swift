@@ -145,14 +145,13 @@ extension OramaCadastroSwiftAPI {
      - parameter envioNovaSenha: (body) Dados para criação do login (optional)
      */
     open class func accountAutenticacaoRedefinirSenhaNovaSenhaPostWithRequestBuilder(envioNovaSenha: EnvioNovaSenha? = nil) -> RequestBuilder<NovaSenha> {
+
         let path = "/autenticacao/redefinir-senha/nova-senha"
         let URLString = OramaCadastroSwiftAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: envioNovaSenha)
 
         let url = URLComponents(string: URLString)
-        
         let requestBuilder: RequestBuilder<NovaSenha>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-        
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
@@ -179,8 +178,7 @@ extension OramaCadastroSwiftAPI {
        - type: http
        - name: JWT
      - parameter solicitacaoRedefinicaoSenha: (body) Dados para criação do login (optional)
-     - returns: RequestBuilder<RetornoSolicitacaoRedefinicaoSenha> 
-
+     - returns: RequestBuilder<RetornoSolicitacaoRedefinicaoSenha>
      */
     open class func accountAutenticacaoRedefinirSenhaPostWithRequestBuilder(solicitacaoRedefinicaoSenha: SolicitacaoRedefinicaoSenha? = nil) -> RequestBuilder<RetornoSolicitacaoRedefinicaoSenha> {
         let path = "/autenticacao/redefinir-senha"
@@ -189,6 +187,7 @@ extension OramaCadastroSwiftAPI {
         let url = URLComponents(string: URLString)
 
         let requestBuilder: RequestBuilder<RetornoSolicitacaoRedefinicaoSenha>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
