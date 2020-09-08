@@ -7,16 +7,14 @@
 
 import Foundation
 
-
-
 @objc public class PerfilUsuario: NSObject, Codable {
 
-    public enum Nacionalidade: String, Codable {
+    public enum Nacionalidade: String, Codable, CaseIterable {
         case brasileiroNato = "Brasileiro Nato"
         case estrangeiro = "Estrangeiro"
         case brasileiroNaturalizado = "Brasileiro Naturalizado"
     }
-    public enum UfNascimento: String, Codable {
+    public enum UfNascimento: String, Codable, CaseIterable {
         case ac = "AC"
         case al = "AL"
         case am = "AM"
@@ -46,11 +44,11 @@ import Foundation
         case to = "TO"
         case empty = ""
     }
-    public enum Sexo: String, Codable {
+    public enum Sexo: String, Codable, CaseIterable {
         case feminino = "Feminino"
         case masculino = "Masculino"
     }
-    public enum EstadoCivil: String, Codable {
+    public enum EstadoCivil: String, Codable, CaseIterable {
         case casadoA = "Casado(a)"
         case solteiroA = "Solteiro(a)"
         case divorciadoA = "Divorciado(a)"
@@ -93,18 +91,11 @@ import Foundation
     public var estadoCivil: EstadoCivil?
     /** Nome do conjuge ou companheiro, necessário em casos que o estado civil seja &#39;Casado(a)&#39; ou &#39;União estável&#39; */
     public var nomeConjuge: String?
+    /** CPF do conjuge ou companheiro, necessário em casos que o estado civil seja &#39;Casado(a)&#39; ou &#39;União estável&#39; */
+    public var cpfConjuge: String?
     /** Nome da mãe do usuário */
     public var nomeMae: String?
-    /** Nome do pai do usuário.   - É obrigatório caso o usuário não possua pai desconhecido. */
-    public var nomePai: String?
-    /** Se o usuário não possui Nome do Pai nos documentos. */
-    public var paiDesconhecido: Bool? = false
-    public var paiDesconhecidoNum: NSNumber? {
-        get {
-            return paiDesconhecido as NSNumber?
-        }
-    }
-    
+
     public var login: LoginObjeto?
     public var documento: [Documento]?
     public var profissao: DadosProfissionais?
@@ -113,8 +104,7 @@ import Foundation
     public var contaBancaria: [ContaBancaria]?
     public var frontEnd: FrontEndStep?
 
-    public init(usPerson: Bool?, politicamenteExposto: Bool?, investidorQualificado: Bool?, nacionalidade: Nacionalidade?, ufNascimento: UfNascimento?, cidadeNascimento: String?, paisNascimento: String?, sexo: Sexo?, estadoCivil: EstadoCivil?, nomeConjuge: String?, nomeMae: String?, nomePai: String?, paiDesconhecido: Bool?, login: LoginObjeto?, documento: [Documento]?, profissao: DadosProfissionais?, endereco: Endereco?, patrimonio: DadosPatrimonial?, contaBancaria: [ContaBancaria]?, frontEnd: FrontEndStep?) {
-        
+    public init(usPerson: Bool?, politicamenteExposto: Bool?, investidorQualificado: Bool?, nacionalidade: Nacionalidade?, ufNascimento: UfNascimento?, cidadeNascimento: String?, paisNascimento: String?, sexo: Sexo?, estadoCivil: EstadoCivil?, nomeConjuge: String?, cpfConjuge: String?, nomeMae: String?, login: LoginObjeto?, documento: [Documento]?, profissao: DadosProfissionais?, endereco: Endereco?, patrimonio: DadosPatrimonial?, contaBancaria: [ContaBancaria]?, frontEnd: FrontEndStep?) {
         self.usPerson = usPerson
         self.politicamenteExposto = politicamenteExposto
         self.investidorQualificado = investidorQualificado
@@ -125,9 +115,8 @@ import Foundation
         self.sexo = sexo
         self.estadoCivil = estadoCivil
         self.nomeConjuge = nomeConjuge
+        self.cpfConjuge = cpfConjuge
         self.nomeMae = nomeMae
-        self.nomePai = nomePai
-        self.paiDesconhecido = paiDesconhecido
         self.login = login
         self.documento = documento
         self.profissao = profissao

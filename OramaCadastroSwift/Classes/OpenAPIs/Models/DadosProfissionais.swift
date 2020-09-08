@@ -16,17 +16,16 @@ import Foundation
     /** Nome da empresa em que trabalha o usuário.  - É obrigatório caso o usuário esteja empregado. */
     public var empresa: String?
     /** Se o usuário esta empregado no momento. */
-    public var empregado: Bool? = true
-    public var empregadoNum: NSNumber? {
-        get {
-            return empregado as NSNumber?
-        }
-    }
-    
-    public init(profissao: String?, empresa: String?, empregado: Bool?) {
+
+    public var empregado: Bool = true
+    /** CNPJ da empresa em que trabalha o usuário.  - É obrigatório caso o usuário esteja empregado. */
+    public var cnpjEmpregador: String?
+
+    public init(profissao: String, empresa: String?, empregado: Bool, cnpjEmpregador: String?) {
         self.profissao = profissao
         self.empresa = empresa
         self.empregado = empregado
+        self.cnpjEmpregador = cnpjEmpregador
     }
     
 }

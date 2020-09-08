@@ -9,9 +9,9 @@ import Foundation
 
 /** Informação sobre o Patrimônio do usuário */
 
-@objc public class DadosPatrimonial: NSObject, Codable {
-    
-    public enum FaixaAplicacoes: String, Codable {
+@objc public class DadosPatrimonial: NSObject, Codable { 
+
+    public enum FaixaAplicacoes: String, Codable, CaseIterable {
         case _0 = "0"
         case _1 = "1"
         case _2 = "2"
@@ -20,7 +20,7 @@ import Foundation
         case _5 = "5"
         case _6 = "6"
     }
-    public enum FaixaRendimentos: String, Codable {
+    public enum FaixaRendimentos: String, Codable, CaseIterable {
         case _0 = "0"
         case _1 = "1"
         case _2 = "2"

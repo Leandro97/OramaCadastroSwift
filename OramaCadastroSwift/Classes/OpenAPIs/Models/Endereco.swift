@@ -9,9 +9,9 @@ import Foundation
 
 /** Definição de endereço */
 
-@objc public class Endereco: NSObject, Codable {
-    
-    public enum Uf: String, Codable {
+@objc public class Endereco: NSObject, Codable { 
+
+    public enum Uf: String, Codable, CaseIterable {
         case ac = "AC"
         case al = "AL"
         case am = "AM"
