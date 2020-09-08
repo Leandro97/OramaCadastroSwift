@@ -9,8 +9,8 @@ import Foundation
 
 /** Modelo de Conta bancária no sistema bancário brasileiro. Deve ser enviado somente uma conta bancária na lista de &#39;contaBancaria&#39;. */
 
-@objc public class ContaBancaria: NSObject, Codable { 
-
+@objc public class ContaBancaria: NSObject, Codable {
+    
     public enum Tipo: String, Codable, CaseIterable {
         case cc = "CC"
         case cp = "CP"
@@ -26,14 +26,14 @@ import Foundation
     /** Digito verificador da conta bancária */
     public var digito: String?
     /** Informação que define se é uma conta conjunta. Caso seja, deve ser definido como true. */
-
+    
     public var contaConjunta: Bool = false
     /** Informação se o segundo participante (co-titular) é o titular da conta, caso não seja, o primeiro participante quem esta preenchendo a conta é o titular. */
     public var segundoParticipanteTitular: Bool = false
     /** CPF do co-titular caso seja conta conjunta. CPF deve ser válido. O CPF tem que ter os 11 dígitos com a máscara incluindo os pontos e hífen.  - Obrigatório caso a conta bancária seja conta conjunta */
     public var cpfCotitular: String?
     
-    public init(banco: String?, tipo: Tipo?, agencia: String?, conta: String?, digito: String?, contaConjunta: Bool?, segundoParticipanteTitular: Bool?, cpfCotitular: String?) {
+    public init(banco: String?, tipo: Tipo?, agencia: String?, conta: String?, digito: String?, contaConjunta: Bool, segundoParticipanteTitular: Bool, cpfCotitular: String?) {
         self.banco = banco
         self.tipo = tipo
         self.agencia = agencia
@@ -45,3 +45,4 @@ import Foundation
     }
     
 }
+

@@ -8,784 +8,788 @@
 import Foundation
 
 extension OramaCadastroSwiftAPI {
-
-
-@objc open class UsersAPI : NSObject {
-
-    open class func accountAutenticacaoAndroidPost(usuarioSenhaObjeto: UsuarioSenhaObjeto, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: AutenticacaoObjeto?,_ error: Error?) -> Void)) {
-        accountAutenticacaoAndroidPostWithRequestBuilder(usuarioSenhaObjeto: usuarioSenhaObjeto).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountAutenticacaoAndroidPostWithRequestBuilder(usuarioSenhaObjeto: UsuarioSenhaObjeto) -> RequestBuilder<AutenticacaoObjeto> {
-        let path = "/autenticacao/android/"
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usuarioSenhaObjeto)
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<AutenticacaoObjeto>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    open class func accountAutenticacaoIosPost(usuarioSenhaObjeto: UsuarioSenhaObjeto, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: AutenticacaoObjeto?,_ error: Error?) -> Void)) {
-        accountAutenticacaoIosPostWithRequestBuilder(usuarioSenhaObjeto: usuarioSenhaObjeto).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountAutenticacaoIosPostWithRequestBuilder(usuarioSenhaObjeto: UsuarioSenhaObjeto) -> RequestBuilder<AutenticacaoObjeto> {
-        let path = "/autenticacao/ios/"
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usuarioSenhaObjeto)
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<AutenticacaoObjeto>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    open class func accountAutenticacaoPost(usuarioSenhaObjeto: UsuarioSenhaObjeto, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: AutenticacaoObjeto?,_ error: Error?) -> Void)) {
-        accountAutenticacaoPostWithRequestBuilder(usuarioSenhaObjeto: usuarioSenhaObjeto).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-
-        }
-    }
-
-    open class func accountAutenticacaoPostWithRequestBuilder(usuarioSenhaObjeto: UsuarioSenhaObjeto) -> RequestBuilder<AutenticacaoObjeto> {
-        let path = "/autenticacao/"
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usuarioSenhaObjeto)
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<AutenticacaoObjeto>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    open class func accountAutenticacaoRedefinirSenhaConfirmarSmsPost(confirmacaoCodigoSMS: ConfirmacaoCodigoSMS? = nil, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: ConfirmacaoCodigoSMS?,_ error: Error?) -> Void)) {
-        accountAutenticacaoRedefinirSenhaConfirmarSmsPostWithRequestBuilder(confirmacaoCodigoSMS: confirmacaoCodigoSMS).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountAutenticacaoRedefinirSenhaConfirmarSmsPostWithRequestBuilder(confirmacaoCodigoSMS: ConfirmacaoCodigoSMS? = nil) -> RequestBuilder<ConfirmacaoCodigoSMS> {
-        let path = "/autenticacao/redefinir-senha/confirmar-sms"
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: confirmacaoCodigoSMS)
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<ConfirmacaoCodigoSMS>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    open class func accountAutenticacaoRedefinirSenhaEnviarSmsPost(loginRedefinicaoSenha: LoginRedefinicaoSenha? = nil, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: RetornoSolicitacaoRedefinicaoSenha?,_ error: Error?) -> Void)) {
-        accountAutenticacaoRedefinirSenhaEnviarSmsPostWithRequestBuilder(loginRedefinicaoSenha: loginRedefinicaoSenha).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    /**
-     Solicitar envio do código para redefinição de senha via SMS
-     - POST /autenticacao/redefinir-senha/enviar-sms
-     - Solicitar código de redefinição de senha  - Após confirmar a data de nascimento pode ser solicitado código via SMS para redefinir a senha  - O código SMS expira após 15 minutos
-     - API Key:
-       - type: apiKey X-Api-Key 
-       - name: Api-Key
-     - parameter loginRedefinicaoSenha: (body) Dados para criação do login (optional)
-     - returns: RequestBuilder<RetornoSolicitacaoRedefinicaoSenha> 
-     */
-    open class func accountAutenticacaoRedefinirSenhaEnviarSmsPostWithRequestBuilder(loginRedefinicaoSenha: LoginRedefinicaoSenha? = nil) -> RequestBuilder<RetornoSolicitacaoRedefinicaoSenha> {
-        let path = "/autenticacao/redefinir-senha/enviar-sms"
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: loginRedefinicaoSenha)
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<RetornoSolicitacaoRedefinicaoSenha>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    open class func accountAutenticacaoRedefinirSenhaNovaSenhaPost(envioNovaSenha: EnvioNovaSenha? = nil, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: RetornoNovaSenha?,_ error: Error?) -> Void)) {
-        accountAutenticacaoRedefinirSenhaNovaSenhaPostWithRequestBuilder(envioNovaSenha: envioNovaSenha).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-        let path = "/autenticacao/redefinir-senha/nova-senha"
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: envioNovaSenha)
-
-        let url = URLComponents(string: URLString)
-        let requestBuilder: RequestBuilder<NovaSenha>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    open class func accountAutenticacaoRedefinirSenhaPost(solicitacaoRedefinicaoSenha: SolicitacaoRedefinicaoSenha? = nil, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: RetornoSolicitacaoRedefinicaoSenha?,_ error: Error?) -> Void)) {
-        accountAutenticacaoRedefinirSenhaPostWithRequestBuilder(solicitacaoRedefinicaoSenha: solicitacaoRedefinicaoSenha).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountAutenticacaoRedefinirSenhaPostWithRequestBuilder(solicitacaoRedefinicaoSenha: SolicitacaoRedefinicaoSenha? = nil) -> RequestBuilder<RetornoSolicitacaoRedefinicaoSenha> {
-        let path = "/autenticacao/redefinir-senha"
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: solicitacaoRedefinicaoSenha)
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<RetornoSolicitacaoRedefinicaoSenha>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    open class func accountAutenticacaoWebPost(usuarioSenhaObjeto: UsuarioSenhaObjeto, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: AutenticacaoObjeto?,_ error: Error?) -> Void)) {
-        accountAutenticacaoWebPostWithRequestBuilder(usuarioSenhaObjeto: usuarioSenhaObjeto).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountAutenticacaoWebPostWithRequestBuilder(usuarioSenhaObjeto: UsuarioSenhaObjeto) -> RequestBuilder<AutenticacaoObjeto> {
-        let path = "/autenticacao/web/"
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usuarioSenhaObjeto)
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<AutenticacaoObjeto>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    public enum TipoDocumento_accountDocumentoConfirmacaoGet: String, CaseIterable {
-        case carteiraDeHabilitaçãoCnh = "Carteira de Habilitação - CNH"
-        case passaporte = "Passaporte"
-        case cartIdentEstrangeiroRne = "Cart. Ident. Estrangeiro - RNE"
-        case cartIdentidadeProfissional = "Cart. Identidade Profissional"
-        case carteiraDeIdentidadeRg = "Carteira de Identidade / RG"
-        case comprovanteBancário = "Comprovante Bancário"
-        case comprovanteDeResidência = "Comprovante de Residência"
-    }
-
-    open class func accountDocumentoConfirmacaoGet(cpf: String, tipoDocumento: TipoDocumento_accountDocumentoConfirmacaoGet, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
-        accountDocumentoConfirmacaoGetWithRequestBuilder(cpf: cpf, tipoDocumento: tipoDocumento).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case .success:
-                completion((), nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountDocumentoConfirmacaoGetWithRequestBuilder(cpf: String, tipoDocumento: TipoDocumento_accountDocumentoConfirmacaoGet) -> RequestBuilder<Void> {
-        var path = "/perfil/{cpf}/documento/confirmacao/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "tipoDocumento": tipoDocumento.encodeToJSON()
-        ])
-
-        let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    public enum TipoDocumento_accountDocumentoPut: String, CaseIterable {
-        case carteiraDeHabilitaçãoCnh = "Carteira de Habilitação - CNH"
-        case passaporte = "Passaporte"
-        case cartIdentEstrangeiroRne = "Cart. Ident. Estrangeiro - RNE"
-        case cartIdentidadeProfissional = "Cart. Identidade Profissional"
-        case carteiraDeIdentidadeRg = "Carteira de Identidade / RG"
-        case comprovanteBancário = "Comprovante Bancário"
-        case comprovanteDeResidência = "Comprovante de Residência"
-    }
     
-    open class func accountDocumentoPut(cpf: String, tipoDocumento: TipoDocumento_accountDocumentoPut, filename: URL, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
-        accountDocumentoPutWithRequestBuilder(cpf: cpf, tipoDocumento: tipoDocumento, filename: filename).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case .success:
-                completion((), nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountDocumentoPutWithRequestBuilder(cpf: String, tipoDocumento: TipoDocumento_accountDocumentoPut, filename: URL) -> RequestBuilder<Void> {
-        var path = "/perfil/{cpf}/documento/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let formParams: [String:Any?] = [
-            "filename": filename.encodeToJSON()
-        ]
-
-        let nonNullParameters = APIHelper.rejectNil(formParams)
-        let parameters = APIHelper.convertBoolToString(nonNullParameters)
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "tipoDocumento": tipoDocumento.encodeToJSON()
-        ])
-
-        let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountIdentificacaoPost(loginSenhaObjeto: LoginSenhaObjeto, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: LoginCriado?,_ error: Error?) -> Void)) {
-        accountIdentificacaoPostWithRequestBuilder(loginSenhaObjeto: loginSenhaObjeto).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountIdentificacaoPostWithRequestBuilder(loginSenhaObjeto: LoginSenhaObjeto) -> RequestBuilder<LoginCriado> {
-        let path = "/identificacao/"
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: loginSenhaObjeto)
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<LoginCriado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    open class func accountPerfilAprovacaoGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Aprovacao?,_ error: Error?) -> Void)) {
-        accountPerfilAprovacaoGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilAprovacaoGetWithRequestBuilder(cpf: String) -> RequestBuilder<Aprovacao> {
-        var path = "/perfil/{cpf}/aprovacao/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Aprovacao>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilAssinaturaEletronicaGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
-        accountPerfilAssinaturaEletronicaGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case .success:
-                completion((), nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilAssinaturaEletronicaGetWithRequestBuilder(cpf: String) -> RequestBuilder<Void> {
-        var path = "/perfil/{cpf}/assinatura-eletronica/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilAssinaturaEletronicaPost(cpf: String, assinaturaEletronica: AssinaturaEletronica, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
-        accountPerfilAssinaturaEletronicaPostWithRequestBuilder(cpf: cpf, assinaturaEletronica: assinaturaEletronica).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case .success:
-                completion((), nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilAssinaturaEletronicaPostWithRequestBuilder(cpf: String, assinaturaEletronica: AssinaturaEletronica) -> RequestBuilder<Void> {
-        var path = "/perfil/{cpf}/assinatura-eletronica/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: assinaturaEletronica)
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    open class func accountPerfilCelularAutenticacaoConfirmacaoGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Confirmado?,_ error: Error?) -> Void)) {
-        accountPerfilCelularAutenticacaoConfirmacaoGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilCelularAutenticacaoConfirmacaoGetWithRequestBuilder(cpf: String) -> RequestBuilder<Confirmado> {
-        var path = "/perfil/{cpf}/celular/autenticacao/confirmacao/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Confirmado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilCelularAutenticacaoPost(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
-        accountPerfilCelularAutenticacaoPostWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case .success:
-                completion((), nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilCelularAutenticacaoPostWithRequestBuilder(cpf: String) -> RequestBuilder<Void> {
-        var path = "/perfil/{cpf}/celular/autenticacao/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilCelularConfirmacaoPost(cpf: String, codigo: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Confirmado?,_ error: Error?) -> Void)) {
-        accountPerfilCelularConfirmacaoPostWithRequestBuilder(cpf: cpf, codigo: codigo).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilCelularConfirmacaoPostWithRequestBuilder(cpf: String, codigo: String) -> RequestBuilder<Confirmado> {
-        var path = "/perfil/{cpf}/celular/autenticacao/confirmacao/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "codigo": codigo.encodeToJSON()
-        ])
-
-        let requestBuilder: RequestBuilder<Confirmado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilEmailAutenticacaoConfirmacaoGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Confirmado?,_ error: Error?) -> Void)) {
-        accountPerfilEmailAutenticacaoConfirmacaoGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilEmailAutenticacaoConfirmacaoGetWithRequestBuilder(cpf: String) -> RequestBuilder<Confirmado> {
-        var path = "/perfil/{cpf}/email/autenticacao/confirmacao/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Confirmado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilEmailAutenticacaoPost(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
-        accountPerfilEmailAutenticacaoPostWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case .success:
-                completion((), nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilEmailAutenticacaoPostWithRequestBuilder(cpf: String) -> RequestBuilder<Void> {
-        var path = "/perfil/{cpf}/email/autenticacao/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilEmailConfirmacaoPost(cpf: String, codigo: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Confirmado?,_ error: Error?) -> Void)) {
-        accountPerfilEmailConfirmacaoPostWithRequestBuilder(cpf: cpf, codigo: codigo).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilEmailConfirmacaoPostWithRequestBuilder(cpf: String, codigo: String) -> RequestBuilder<Confirmado> {
-        var path = "/perfil/{cpf}/email/autenticacao/confirmacao/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "codigo": codigo.encodeToJSON()
-        ])
-
-        let requestBuilder: RequestBuilder<Confirmado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilGet(cpf: String, campos: String? = nil, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: PerfilUsuario?,_ error: Error?) -> Void)) {
-        accountPerfilGetWithRequestBuilder(cpf: cpf, campos: campos).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilGetWithRequestBuilder(cpf: String, campos: String? = nil) -> RequestBuilder<PerfilUsuario> {
-        var path = "/perfil/{cpf}/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "campos": campos?.encodeToJSON()
-        ])
-
-        let requestBuilder: RequestBuilder<PerfilUsuario>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilPendenciaGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: [Pendencia]?,_ error: Error?) -> Void)) {
-        accountPerfilPendenciaGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilPendenciaGetWithRequestBuilder(cpf: String) -> RequestBuilder<[Pendencia]> {
-        var path = "/perfil/{cpf}/pendencia/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<[Pendencia]>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilPendenciaSolicitaranalisePost(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
-        accountPerfilPendenciaSolicitaranalisePostWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case .success:
-                completion((), nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilPendenciaSolicitaranalisePostWithRequestBuilder(cpf: String) -> RequestBuilder<Void> {
-        var path = "/perfil/{cpf}/pendencia/solicitar-analise/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilPost(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
-        accountPerfilPostWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case .success:
-                completion((), nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilPostWithRequestBuilder(cpf: String) -> RequestBuilder<Void> {
-        var path = "/perfil/{cpf}/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilPut(cpf: String, perfilUsuario: PerfilUsuario, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
-        accountPerfilPutWithRequestBuilder(cpf: cpf, perfilUsuario: perfilUsuario).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case .success:
-                completion((), nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-
-    open class func accountPerfilPutWithRequestBuilder(cpf: String, perfilUsuario: PerfilUsuario) -> RequestBuilder<Void> {
-        var path = "/perfil/{cpf}/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: perfilUsuario)
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    open class func accountPerfilSubmetidoGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Submetido?,_ error: Error?) -> Void)) {
-        accountPerfilSubmetidoGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
     
-    open class func accountPerfilSubmetidoGetWithRequestBuilder(cpf: String) -> RequestBuilder<Submetido> {
-        var path = "/perfil/{cpf}/submetido/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
+    @objc open class UsersAPI : NSObject {
         
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Submetido>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-
-    open class func accountPerfilTermosConfirmacaoGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Confirmado?,_ error: Error?) -> Void)) {
-        accountPerfilTermosConfirmacaoGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+        open class func accountAutenticacaoAndroidPost(usuarioSenhaObjeto: UsuarioSenhaObjeto, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: AutenticacaoObjeto?,_ error: Error?) -> Void)) {
+            accountAutenticacaoAndroidPostWithRequestBuilder(usuarioSenhaObjeto: usuarioSenhaObjeto).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
             }
         }
-    }
-
-    open class func accountPerfilTermosConfirmacaoGetWithRequestBuilder(cpf: String) -> RequestBuilder<Confirmado> {
-        var path = "/perfil/{cpf}/termos/confirmacao/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
         
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Confirmado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilTermosConfirmacaoPost(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Confirmado?,_ error: Error?) -> Void)) {
-        accountPerfilTermosConfirmacaoPostWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+        open class func accountAutenticacaoAndroidPostWithRequestBuilder(usuarioSenhaObjeto: UsuarioSenhaObjeto) -> RequestBuilder<AutenticacaoObjeto> {
+            let path = "/autenticacao/android/"
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usuarioSenhaObjeto)
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<AutenticacaoObjeto>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        }
+        
+        open class func accountAutenticacaoIosPost(usuarioSenhaObjeto: UsuarioSenhaObjeto, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: AutenticacaoObjeto?,_ error: Error?) -> Void)) {
+            accountAutenticacaoIosPostWithRequestBuilder(usuarioSenhaObjeto: usuarioSenhaObjeto).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
             }
         }
-    }
-
-    open class func accountPerfilTermosConfirmacaoPostWithRequestBuilder(cpf: String) -> RequestBuilder<Confirmado> {
-        var path = "/perfil/{cpf}/termos/confirmacao/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
         
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Confirmado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    open class func accountPerfilTermosGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: [Termos]?,_ error: Error?) -> Void)) {
-        accountPerfilTermosGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+        open class func accountAutenticacaoIosPostWithRequestBuilder(usuarioSenhaObjeto: UsuarioSenhaObjeto) -> RequestBuilder<AutenticacaoObjeto> {
+            let path = "/autenticacao/ios/"
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usuarioSenhaObjeto)
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<AutenticacaoObjeto>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        }
+        
+        open class func accountAutenticacaoPost(usuarioSenhaObjeto: UsuarioSenhaObjeto, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: AutenticacaoObjeto?,_ error: Error?) -> Void)) {
+            accountAutenticacaoPostWithRequestBuilder(usuarioSenhaObjeto: usuarioSenhaObjeto).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+                
             }
         }
-    }
-
-    open class func accountPerfilTermosGetWithRequestBuilder(cpf: String) -> RequestBuilder<[Termos]> {
-        var path = "/perfil/{cpf}/termos/"
-        let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
-        let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
-        let URLString = OramaCadastroSwiftAPI.basePath + path
-        let parameters: [String:Any]? = nil
         
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<[Termos]>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        open class func accountAutenticacaoPostWithRequestBuilder(usuarioSenhaObjeto: UsuarioSenhaObjeto) -> RequestBuilder<AutenticacaoObjeto> {
+            let path = "/autenticacao/"
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usuarioSenhaObjeto)
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<AutenticacaoObjeto>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        }
+        
+        open class func accountAutenticacaoRedefinirSenhaConfirmarSmsPost(confirmacaoCodigoSMS: ConfirmacaoCodigoSMS? = nil, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: ConfirmacaoCodigoSMS?,_ error: Error?) -> Void)) {
+            accountAutenticacaoRedefinirSenhaConfirmarSmsPostWithRequestBuilder(confirmacaoCodigoSMS: confirmacaoCodigoSMS).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountAutenticacaoRedefinirSenhaConfirmarSmsPostWithRequestBuilder(confirmacaoCodigoSMS: ConfirmacaoCodigoSMS? = nil) -> RequestBuilder<ConfirmacaoCodigoSMS> {
+            let path = "/autenticacao/redefinir-senha/confirmar-sms"
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: confirmacaoCodigoSMS)
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<ConfirmacaoCodigoSMS>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        }
+        
+        open class func accountAutenticacaoRedefinirSenhaEnviarSmsPost(loginRedefinicaoSenha: LoginRedefinicaoSenha? = nil, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: RetornoSolicitacaoRedefinicaoSenha?,_ error: Error?) -> Void)) {
+            accountAutenticacaoRedefinirSenhaEnviarSmsPostWithRequestBuilder(loginRedefinicaoSenha: loginRedefinicaoSenha).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        /**
+         Solicitar envio do código para redefinição de senha via SMS
+         - POST /autenticacao/redefinir-senha/enviar-sms
+         - Solicitar código de redefinição de senha  - Após confirmar a data de nascimento pode ser solicitado código via SMS para redefinir a senha  - O código SMS expira após 15 minutos
+         - API Key:
+         - type: apiKey X-Api-Key
+         - name: Api-Key
+         - parameter loginRedefinicaoSenha: (body) Dados para criação do login (optional)
+         - returns: RequestBuilder<RetornoSolicitacaoRedefinicaoSenha>
+         */
+        open class func accountAutenticacaoRedefinirSenhaEnviarSmsPostWithRequestBuilder(loginRedefinicaoSenha: LoginRedefinicaoSenha? = nil) -> RequestBuilder<RetornoSolicitacaoRedefinicaoSenha> {
+            let path = "/autenticacao/redefinir-senha/enviar-sms"
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: loginRedefinicaoSenha)
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<RetornoSolicitacaoRedefinicaoSenha>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        }
+        
+        open class func accountAutenticacaoRedefinirSenhaNovaSenhaPost(envioNovaSenha: EnvioNovaSenha? = nil, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: NovaSenha?,_ error: Error?) -> Void)) {
+            accountAutenticacaoRedefinirSenhaNovaSenhaPostWithRequestBuilder(envioNovaSenha: envioNovaSenha).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountAutenticacaoRedefinirSenhaNovaSenhaPostWithRequestBuilder(envioNovaSenha: EnvioNovaSenha? = nil) -> RequestBuilder<NovaSenha> {
+            
+            let path = "/autenticacao/redefinir-senha/nova-senha"
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: envioNovaSenha)
+            
+            let url = URLComponents(string: URLString)
+            let requestBuilder: RequestBuilder<NovaSenha>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        }
+        
+        open class func accountAutenticacaoRedefinirSenhaPost(solicitacaoRedefinicaoSenha: SolicitacaoRedefinicaoSenha? = nil, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: RetornoSolicitacaoRedefinicaoSenha?,_ error: Error?) -> Void)) {
+            accountAutenticacaoRedefinirSenhaPostWithRequestBuilder(solicitacaoRedefinicaoSenha: solicitacaoRedefinicaoSenha).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountAutenticacaoRedefinirSenhaPostWithRequestBuilder(solicitacaoRedefinicaoSenha: SolicitacaoRedefinicaoSenha? = nil) -> RequestBuilder<RetornoSolicitacaoRedefinicaoSenha> {
+            let path = "/autenticacao/redefinir-senha"
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: solicitacaoRedefinicaoSenha)
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<RetornoSolicitacaoRedefinicaoSenha>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        }
+        
+        open class func accountAutenticacaoWebPost(usuarioSenhaObjeto: UsuarioSenhaObjeto, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: AutenticacaoObjeto?,_ error: Error?) -> Void)) {
+            accountAutenticacaoWebPostWithRequestBuilder(usuarioSenhaObjeto: usuarioSenhaObjeto).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountAutenticacaoWebPostWithRequestBuilder(usuarioSenhaObjeto: UsuarioSenhaObjeto) -> RequestBuilder<AutenticacaoObjeto> {
+            let path = "/autenticacao/web/"
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: usuarioSenhaObjeto)
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<AutenticacaoObjeto>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        }
+        
+        public enum TipoDocumento_accountDocumentoConfirmacaoGet: String, CaseIterable {
+            case carteiraDeHabilitaçãoCnh = "Carteira de Habilitação - CNH"
+            case passaporte = "Passaporte"
+            case cartIdentEstrangeiroRne = "Cart. Ident. Estrangeiro - RNE"
+            case cartIdentidadeProfissional = "Cart. Identidade Profissional"
+            case carteiraDeIdentidadeRg = "Carteira de Identidade / RG"
+            case comprovanteBancário = "Comprovante Bancário"
+            case comprovanteDeResidência = "Comprovante de Residência"
+        }
+        
+        open class func accountDocumentoConfirmacaoGet(cpf: String, tipoDocumento: TipoDocumento_accountDocumentoConfirmacaoGet, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+            accountDocumentoConfirmacaoGetWithRequestBuilder(cpf: cpf, tipoDocumento: tipoDocumento).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case .success:
+                    completion((), nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountDocumentoConfirmacaoGetWithRequestBuilder(cpf: String, tipoDocumento: TipoDocumento_accountDocumentoConfirmacaoGet) -> RequestBuilder<Void> {
+            var path = "/perfil/{cpf}/documento/confirmacao/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            var url = URLComponents(string: URLString)
+            url?.queryItems = APIHelper.mapValuesToQueryItems([
+                "tipoDocumento": tipoDocumento.encodeToJSON()
+            ])
+            
+            let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
+            
+            return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        public enum TipoDocumento_accountDocumentoPut: String, CaseIterable {
+            case carteiraDeHabilitaçãoCnh = "Carteira de Habilitação - CNH"
+            case passaporte = "Passaporte"
+            case cartIdentEstrangeiroRne = "Cart. Ident. Estrangeiro - RNE"
+            case cartIdentidadeProfissional = "Cart. Identidade Profissional"
+            case carteiraDeIdentidadeRg = "Carteira de Identidade / RG"
+            case comprovanteBancário = "Comprovante Bancário"
+            case comprovanteDeResidência = "Comprovante de Residência"
+        }
+        
+        open class func accountDocumentoPut(cpf: String, tipoDocumento: TipoDocumento_accountDocumentoPut, filename: URL, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+            accountDocumentoPutWithRequestBuilder(cpf: cpf, tipoDocumento: tipoDocumento, filename: filename).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case .success:
+                    completion((), nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountDocumentoPutWithRequestBuilder(cpf: String, tipoDocumento: TipoDocumento_accountDocumentoPut, filename: URL) -> RequestBuilder<Void> {
+            var path = "/perfil/{cpf}/documento/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let formParams: [String:Any?] = [
+                "filename": filename.encodeToJSON()
+            ]
+            
+            let nonNullParameters = APIHelper.rejectNil(formParams)
+            let parameters = APIHelper.convertBoolToString(nonNullParameters)
+            
+            var url = URLComponents(string: URLString)
+            url?.queryItems = APIHelper.mapValuesToQueryItems([
+                "tipoDocumento": tipoDocumento.encodeToJSON()
+            ])
+            
+            let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
+            
+            return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountIdentificacaoPost(loginSenhaObjeto: LoginSenhaObjeto, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: LoginCriado?,_ error: Error?) -> Void)) {
+            accountIdentificacaoPostWithRequestBuilder(loginSenhaObjeto: loginSenhaObjeto).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountIdentificacaoPostWithRequestBuilder(loginSenhaObjeto: LoginSenhaObjeto) -> RequestBuilder<LoginCriado> {
+            let path = "/identificacao/"
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: loginSenhaObjeto)
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<LoginCriado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        }
+        
+        open class func accountPerfilAprovacaoGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Aprovacao?,_ error: Error?) -> Void)) {
+            accountPerfilAprovacaoGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilAprovacaoGetWithRequestBuilder(cpf: String) -> RequestBuilder<Aprovacao> {
+            var path = "/perfil/{cpf}/aprovacao/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<Aprovacao>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilAssinaturaEletronicaGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+            accountPerfilAssinaturaEletronicaGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case .success:
+                    completion((), nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilAssinaturaEletronicaGetWithRequestBuilder(cpf: String) -> RequestBuilder<Void> {
+            var path = "/perfil/{cpf}/assinatura-eletronica/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
+            
+            return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilAssinaturaEletronicaPost(cpf: String, assinaturaEletronica: AssinaturaEletronica, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+            accountPerfilAssinaturaEletronicaPostWithRequestBuilder(cpf: cpf, assinaturaEletronica: assinaturaEletronica).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case .success:
+                    completion((), nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilAssinaturaEletronicaPostWithRequestBuilder(cpf: String, assinaturaEletronica: AssinaturaEletronica) -> RequestBuilder<Void> {
+            var path = "/perfil/{cpf}/assinatura-eletronica/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: assinaturaEletronica)
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        }
+        
+        open class func accountPerfilCelularAutenticacaoConfirmacaoGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Confirmado?,_ error: Error?) -> Void)) {
+            accountPerfilCelularAutenticacaoConfirmacaoGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilCelularAutenticacaoConfirmacaoGetWithRequestBuilder(cpf: String) -> RequestBuilder<Confirmado> {
+            var path = "/perfil/{cpf}/celular/autenticacao/confirmacao/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<Confirmado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilCelularAutenticacaoPost(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+            accountPerfilCelularAutenticacaoPostWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case .success:
+                    completion((), nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilCelularAutenticacaoPostWithRequestBuilder(cpf: String) -> RequestBuilder<Void> {
+            var path = "/perfil/{cpf}/celular/autenticacao/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilCelularConfirmacaoPost(cpf: String, codigo: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Confirmado?,_ error: Error?) -> Void)) {
+            accountPerfilCelularConfirmacaoPostWithRequestBuilder(cpf: cpf, codigo: codigo).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilCelularConfirmacaoPostWithRequestBuilder(cpf: String, codigo: String) -> RequestBuilder<Confirmado> {
+            var path = "/perfil/{cpf}/celular/autenticacao/confirmacao/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            var url = URLComponents(string: URLString)
+            url?.queryItems = APIHelper.mapValuesToQueryItems([
+                "codigo": codigo.encodeToJSON()
+            ])
+            
+            let requestBuilder: RequestBuilder<Confirmado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilEmailAutenticacaoConfirmacaoGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Confirmado?,_ error: Error?) -> Void)) {
+            accountPerfilEmailAutenticacaoConfirmacaoGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilEmailAutenticacaoConfirmacaoGetWithRequestBuilder(cpf: String) -> RequestBuilder<Confirmado> {
+            var path = "/perfil/{cpf}/email/autenticacao/confirmacao/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<Confirmado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilEmailAutenticacaoPost(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+            accountPerfilEmailAutenticacaoPostWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case .success:
+                    completion((), nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilEmailAutenticacaoPostWithRequestBuilder(cpf: String) -> RequestBuilder<Void> {
+            var path = "/perfil/{cpf}/email/autenticacao/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilEmailConfirmacaoPost(cpf: String, codigo: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Confirmado?,_ error: Error?) -> Void)) {
+            accountPerfilEmailConfirmacaoPostWithRequestBuilder(cpf: cpf, codigo: codigo).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilEmailConfirmacaoPostWithRequestBuilder(cpf: String, codigo: String) -> RequestBuilder<Confirmado> {
+            var path = "/perfil/{cpf}/email/autenticacao/confirmacao/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            var url = URLComponents(string: URLString)
+            url?.queryItems = APIHelper.mapValuesToQueryItems([
+                "codigo": codigo.encodeToJSON()
+            ])
+            
+            let requestBuilder: RequestBuilder<Confirmado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilGet(cpf: String, campos: String? = nil, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: PerfilUsuario?,_ error: Error?) -> Void)) {
+            accountPerfilGetWithRequestBuilder(cpf: cpf, campos: campos).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilGetWithRequestBuilder(cpf: String, campos: String? = nil) -> RequestBuilder<PerfilUsuario> {
+            var path = "/perfil/{cpf}/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            var url = URLComponents(string: URLString)
+            url?.queryItems = APIHelper.mapValuesToQueryItems([
+                "campos": campos?.encodeToJSON()
+            ])
+            
+            let requestBuilder: RequestBuilder<PerfilUsuario>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilPendenciaGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: [Pendencia]?,_ error: Error?) -> Void)) {
+            accountPerfilPendenciaGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilPendenciaGetWithRequestBuilder(cpf: String) -> RequestBuilder<[Pendencia]> {
+            var path = "/perfil/{cpf}/pendencia/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<[Pendencia]>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilPendenciaSolicitaranalisePost(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+            accountPerfilPendenciaSolicitaranalisePostWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case .success:
+                    completion((), nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilPendenciaSolicitaranalisePostWithRequestBuilder(cpf: String) -> RequestBuilder<Void> {
+            var path = "/perfil/{cpf}/pendencia/solicitar-analise/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilPost(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+            accountPerfilPostWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case .success:
+                    completion((), nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilPostWithRequestBuilder(cpf: String) -> RequestBuilder<Void> {
+            var path = "/perfil/{cpf}/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilPut(cpf: String, perfilUsuario: PerfilUsuario, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+            accountPerfilPutWithRequestBuilder(cpf: cpf, perfilUsuario: perfilUsuario).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case .success:
+                    completion((), nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilPutWithRequestBuilder(cpf: String, perfilUsuario: PerfilUsuario) -> RequestBuilder<Void> {
+            var path = "/perfil/{cpf}/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: perfilUsuario)
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<Void>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getNonDecodableBuilder()
+            
+            return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        }
+        
+        open class func accountPerfilSubmetidoGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Submetido?,_ error: Error?) -> Void)) {
+            accountPerfilSubmetidoGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilSubmetidoGetWithRequestBuilder(cpf: String) -> RequestBuilder<Submetido> {
+            var path = "/perfil/{cpf}/submetido/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<Submetido>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        
+        open class func accountPerfilTermosConfirmacaoGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Confirmado?,_ error: Error?) -> Void)) {
+            accountPerfilTermosConfirmacaoGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilTermosConfirmacaoGetWithRequestBuilder(cpf: String) -> RequestBuilder<Confirmado> {
+            var path = "/perfil/{cpf}/termos/confirmacao/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<Confirmado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilTermosConfirmacaoPost(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: Confirmado?,_ error: Error?) -> Void)) {
+            accountPerfilTermosConfirmacaoPostWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilTermosConfirmacaoPostWithRequestBuilder(cpf: String) -> RequestBuilder<Confirmado> {
+            var path = "/perfil/{cpf}/termos/confirmacao/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<Confirmado>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
+        open class func accountPerfilTermosGet(cpf: String, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: [Termos]?,_ error: Error?) -> Void)) {
+            accountPerfilTermosGetWithRequestBuilder(cpf: cpf).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    completion(response.body, nil)
+                case let .failure(error):
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        open class func accountPerfilTermosGetWithRequestBuilder(cpf: String) -> RequestBuilder<[Termos]> {
+            var path = "/perfil/{cpf}/termos/"
+            let cpfPreEscape = "\(APIHelper.mapValueToPathItem(cpf))"
+            let cpfPostEscape = cpfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            path = path.replacingOccurrences(of: "{cpf}", with: cpfPostEscape, options: .literal, range: nil)
+            let URLString = OramaCadastroSwiftAPI.basePath + path
+            let parameters: [String:Any]? = nil
+            
+            let url = URLComponents(string: URLString)
+            
+            let requestBuilder: RequestBuilder<[Termos]>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
+            
+            return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        }
+        
     }
-
 }
-}
+
