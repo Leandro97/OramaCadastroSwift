@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**accountAutenticacaoRedefinirSenhaNovaSenhaPost**](UsersAPI.md#accountautenticacaoredefinirsenhanovasenhapost) | **POST** /autenticacao/redefinir-senha/nova-senha | Salvar nova senha
 [**accountAutenticacaoRedefinirSenhaPost**](UsersAPI.md#accountautenticacaoredefinirsenhapost) | **POST** /autenticacao/redefinir-senha | Solicitar início da redefinição de senha
 [**accountAutenticacaoWebPost**](UsersAPI.md#accountautenticacaowebpost) | **POST** /autenticacao/web/ | Autentica um usuário que ainda não é cliente.
+[**accountAutenticacaoWebPost**](UsersAPI.md#accountautenticacaowebpost) | **POST** /autenticacao/web/ | Autentica um usuário que ainda não é cliente.
 [**accountDocumentoConfirmacaoGet**](UsersAPI.md#accountdocumentoconfirmacaoget) | **GET** /perfil/{cpf}/documento/confirmacao/ | Consulta o status de confirmação do documento que foi submetido
 [**accountDocumentoPut**](UsersAPI.md#accountdocumentoput) | **PUT** /perfil/{cpf}/documento/ | Anexa ou atualiza documento para conferencia de autenticidade do perfil.
 [**accountIdentificacaoPost**](UsersAPI.md#accountidentificacaopost) | **POST** /identificacao/ | Cria um login para usuário.

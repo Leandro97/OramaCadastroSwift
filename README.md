@@ -33,6 +33,7 @@ Class | Method | HTTP request | Description
 *UsersAPI* | [**accountAutenticacaoRedefinirSenhaEnviarSmsPost**](docs/UsersAPI.md#accountautenticacaoredefinirsenhaenviarsmspost) | **POST** /autenticacao/redefinir-senha/enviar-sms | Solicitar envio do código para redefinição de senha via SMS
 *UsersAPI* | [**accountAutenticacaoRedefinirSenhaNovaSenhaPost**](docs/UsersAPI.md#accountautenticacaoredefinirsenhanovasenhapost) | **POST** /autenticacao/redefinir-senha/nova-senha | Salvar nova senha
 *UsersAPI* | [**accountAutenticacaoRedefinirSenhaPost**](docs/UsersAPI.md#accountautenticacaoredefinirsenhapost) | **POST** /autenticacao/redefinir-senha | Solicitar início da redefinição de senha
+
 *UsersAPI* | [**accountAutenticacaoWebPost**](docs/UsersAPI.md#accountautenticacaowebpost) | **POST** /autenticacao/web/ | Autentica um usuário que ainda não é cliente.
 *UsersAPI* | [**accountDocumentoConfirmacaoGet**](docs/UsersAPI.md#accountdocumentoconfirmacaoget) | **GET** /perfil/{cpf}/documento/confirmacao/ | Consulta o status de confirmação do documento que foi submetido
 *UsersAPI* | [**accountDocumentoPut**](docs/UsersAPI.md#accountdocumentoput) | **PUT** /perfil/{cpf}/documento/ | Anexa ou atualiza documento para conferencia de autenticidade do perfil.
@@ -80,7 +81,15 @@ Class | Method | HTTP request | Description
  - [NovaSenha](docs/NovaSenha.md)
  - [Pendencia](docs/Pendencia.md)
  - [PerfilUsuario](docs/PerfilUsuario.md)
+
+ - [RetornoContaBancaria](docs/RetornoContaBancaria.md)
+ - [RetornoDadosPatrimonial](docs/RetornoDadosPatrimonial.md)
+ - [RetornoDadosProfissionais](docs/RetornoDadosProfissionais.md)
+ - [RetornoDocumento](docs/RetornoDocumento.md)
+ - [RetornoEndereco](docs/RetornoEndereco.md)
+ - [RetornoLoginObjeto](docs/RetornoLoginObjeto.md)
  - [RetornoNovaSenha](docs/RetornoNovaSenha.md)
+ - [RetornoPerfilUsuario](docs/RetornoPerfilUsuario.md)
  - [RetornoSolicitacaoRedefinicaoSenha](docs/RetornoSolicitacaoRedefinicaoSenha.md)
  - [SolicitacaoRedefinicaoSenha](docs/SolicitacaoRedefinicaoSenha.md)
  - [Submetido](docs/Submetido.md)

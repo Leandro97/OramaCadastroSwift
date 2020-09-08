@@ -82,7 +82,6 @@ extension OramaCadastroSwiftAPI {
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
-
     open class func accountAutenticacaoRedefinirSenhaConfirmarSmsPost(confirmacaoCodigoSMS: ConfirmacaoCodigoSMS? = nil, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: ConfirmacaoCodigoSMS?,_ error: Error?) -> Void)) {
         accountAutenticacaoRedefinirSenhaConfirmarSmsPostWithRequestBuilder(confirmacaoCodigoSMS: confirmacaoCodigoSMS).execute(apiResponseQueue) { result -> Void in
             switch result {
@@ -105,7 +104,6 @@ extension OramaCadastroSwiftAPI {
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
-
 
     open class func accountAutenticacaoRedefinirSenhaEnviarSmsPost(loginRedefinicaoSenha: LoginRedefinicaoSenha? = nil, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: RetornoSolicitacaoRedefinicaoSenha?,_ error: Error?) -> Void)) {
         accountAutenticacaoRedefinirSenhaEnviarSmsPostWithRequestBuilder(loginRedefinicaoSenha: loginRedefinicaoSenha).execute(apiResponseQueue) { result -> Void in
@@ -151,8 +149,6 @@ extension OramaCadastroSwiftAPI {
         }
     }
 
-
-    open class func accountAutenticacaoRedefinirSenhaNovaSenhaPostWithRequestBuilder(envioNovaSenha: EnvioNovaSenha? = nil) -> RequestBuilder<NovaSenha> {
         let path = "/autenticacao/redefinir-senha/nova-senha"
         let URLString = OramaCadastroSwiftAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: envioNovaSenha)
@@ -161,7 +157,6 @@ extension OramaCadastroSwiftAPI {
         let requestBuilder: RequestBuilder<NovaSenha>.Type = OramaCadastroSwiftAPI.requestBuilderFactory.getBuilder()
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
-
 
     open class func accountAutenticacaoRedefinirSenhaPost(solicitacaoRedefinicaoSenha: SolicitacaoRedefinicaoSenha? = nil, apiResponseQueue: DispatchQueue = OramaCadastroSwiftAPI.apiResponseQueue, completion: @escaping ((_ data: RetornoSolicitacaoRedefinicaoSenha?,_ error: Error?) -> Void)) {
         accountAutenticacaoRedefinirSenhaPostWithRequestBuilder(solicitacaoRedefinicaoSenha: solicitacaoRedefinicaoSenha).execute(apiResponseQueue) { result -> Void in
