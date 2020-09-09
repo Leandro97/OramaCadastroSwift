@@ -329,14 +329,6 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
     
 }
 
-fileprivate enum DownloadException : Error {
-    case responseDataMissing
-    case responseFailed
-    case requestMissing
-    case requestMissingPath
-    case requestMissingURL
-}
-
 public enum AlamofireDecodableRequestBuilderError: Error {
     case emptyDataResponse
     case nilHTTPResponse
