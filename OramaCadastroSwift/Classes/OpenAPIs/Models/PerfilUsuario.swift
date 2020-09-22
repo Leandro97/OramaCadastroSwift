@@ -103,8 +103,16 @@ import Foundation
     public var patrimonio: DadosPatrimonial?
     public var contaBancaria: [ContaBancaria]?
     public var frontEnd: FrontEndStep?
+    
+    /** Habilita o RLP para o usuário */
+    public var habilitarRLP: Bool? = false
+    public var habilitarRLPNum: NSNumber? {
+        get {
+            return habilitarRLP as NSNumber?
+        }
+    }
 
-    public init(usPerson: Bool?, politicamenteExposto: Bool?, investidorQualificado: Bool?, nacionalidade: Nacionalidade?, ufNascimento: UfNascimento?, cidadeNascimento: String?, paisNascimento: String?, sexo: Sexo?, estadoCivil: EstadoCivil?, nomeConjuge: String?, cpfConjuge: String?, nomeMae: String?, login: LoginObjeto?, documento: [Documento]?, profissao: DadosProfissionais?, endereco: Endereco?, patrimonio: DadosPatrimonial?, contaBancaria: [ContaBancaria]?, frontEnd: FrontEndStep?) {
+    public init(usPerson: Bool?, politicamenteExposto: Bool?, investidorQualificado: Bool?, nacionalidade: Nacionalidade?, ufNascimento: UfNascimento?, cidadeNascimento: String?, paisNascimento: String?, sexo: Sexo?, estadoCivil: EstadoCivil?, nomeConjuge: String?, cpfConjuge: String?, nomeMae: String?, login: LoginObjeto?, documento: [Documento]?, profissao: DadosProfissionais?, endereco: Endereco?, patrimonio: DadosPatrimonial?, contaBancaria: [ContaBancaria]?, frontEnd: FrontEndStep?, habilitarRLP: Bool?) {
         self.usPerson = usPerson
         self.politicamenteExposto = politicamenteExposto
         self.investidorQualificado = investidorQualificado
@@ -124,6 +132,7 @@ import Foundation
         self.patrimonio = patrimonio
         self.contaBancaria = contaBancaria
         self.frontEnd = frontEnd
+        self.habilitarRLP = habilitarRLP
     }
 
 }
