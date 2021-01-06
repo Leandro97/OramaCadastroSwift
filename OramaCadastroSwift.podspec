@@ -5,6 +5,7 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = '9.0'
   s.version = '1.0.9'
   s.swift_version = '4.2'
+    s.watchos.deployment_target = '6.0'
   s.source = { :git => "https://github.com/ppaulojr/OramaCadastroSwift.git", :tag => s.version.to_s }
   s.authors = 'PPJ'
   s.social_media_url = 'https://twitter.com/ppaulojr'
