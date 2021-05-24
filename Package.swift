@@ -13,8 +13,7 @@ let package = Package(
             targets: ["OramaCadastroSwift"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/Alamofire/Alamofire", .upToNextMajor(from: "4.0.0"))
+        // Dependencies declare other packages that this package depends on
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
