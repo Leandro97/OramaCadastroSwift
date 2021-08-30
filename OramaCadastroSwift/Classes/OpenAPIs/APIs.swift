@@ -37,11 +37,6 @@ open class RequestBuilder<T> {
         self.isBody = isBody
         self.headers = headers
                 
-        #if DEBUG
-        addHeaders(["X-Api-Key": "dvYOrv5C.vikoFmikxyDSbQWDeRlftzoAFTZWWLIG"])
-        #elseif RELEASE
-        addHeaders(["X-Api-Key": "mWyXcafD.PvFDO8XCVr2MYmCRf12cglJi60PjKmGM"])
-        #endif
         
         addHeaders(OramaCadastroSwiftAPI.customHeaders)
     }
