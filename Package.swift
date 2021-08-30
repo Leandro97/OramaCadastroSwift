@@ -4,7 +4,7 @@
 import PackageDescription
 
 let settings: [SwiftSetting]
-settings = [.unsafeFlags(["RELEASE"], .when(platforms: [.iOS], configuration: .release))]
+settings = [.unsafeFlags(["RELEASE"], .when(configuration: .release))]
 
 let package = Package(
     name: "OramaCadastroSwift",
