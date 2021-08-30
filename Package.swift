@@ -25,7 +25,8 @@ let package = Package(
         .target(
             name: "OramaCadastroSwift",
             dependencies: ["Alamofire"],
-            path: "OramaCadastroSwift/Classes/OpenAPIs/")
+            path: "OramaCadastroSwift/Classes/OpenAPIs/",
+            swiftSettings: settings)
     ],
     swiftLanguageVersions: [.v5]
 )
