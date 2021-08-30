@@ -4,7 +4,9 @@
 import PackageDescription
 
 let settings: [SwiftSetting]
-settings = [.define("RELEASE", .when(configuration: .release))]
+settings = [.define("DEBUG", .when(configuration: .debug)),
+            .define("RELEASE", .when(configuration: .release))
+           ]
 
 let package = Package(
     name: "OramaCadastroSwift",
