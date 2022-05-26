@@ -8,7 +8,7 @@ import Foundation
 
 open class OramaCadastroSwiftAPI {
     #if DEBUG
-    public static var basePath = "https://hml-cadastro.orama.com.br/api/contas/v3.0"
+    public static var basePath = "https://ext01-cadastro.orama.com.br/api/contas/v3.0"
     #elseif RELEASE
     public static var basePath = "https://cadastro.orama.com.br/api/contas/v3.0"
     #endif
