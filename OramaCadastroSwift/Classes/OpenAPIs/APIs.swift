@@ -40,7 +40,6 @@ open class RequestBuilder<T> {
                 
         addHeaders(OramaCadastroSwiftAPI.customKeyHeaders)
         addHeaders(OramaCadastroSwiftAPI.customHeaders)
-        addHeaders(["X-Api-Key": "WxR4kiib.0epWsxPAWTlbLQ1iNIbpZlKNQzpoznal"])
     }
     
     open func addHeaders(_ aHeaders:[String:String]) {
