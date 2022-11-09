@@ -13,15 +13,23 @@ import Foundation
 
     public var cpf: String?
     public var email: String?
-    public var dataNascimento: Date
+    public var dataNascimento: Date?
     /** Últimos 4 dígitos do celular */
     public var celular: String?
 
-    public init(cpf: String?, email: String?, dataNascimento: Date, celular: String?) {
+    public init(cpf: String?, email: String?, dataNascimento: Date?, celular: String?) {
         self.cpf = cpf
         self.email = email
         self.dataNascimento = dataNascimento
         self.celular = celular
     }
 
+    convenience init(celular: String) {
+        self.init(
+            cpf: nil,
+            email: nil,
+            dataNascimento: nil,
+            celular: celular
+        )
+    }
 }
