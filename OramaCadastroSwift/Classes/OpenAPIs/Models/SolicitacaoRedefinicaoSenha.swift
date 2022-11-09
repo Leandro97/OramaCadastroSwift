@@ -13,7 +13,7 @@ import Foundation
 
     public var cpf: String?
     public var email: String?
-    public var dataNascimento: Date
+    public var dataNascimento: String?
 
     public init(cpf: String?, email: String?, dataNascimento: Date) {
         self.cpf = cpf
