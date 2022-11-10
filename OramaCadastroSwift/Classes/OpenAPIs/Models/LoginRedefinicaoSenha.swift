@@ -12,11 +12,11 @@ import Foundation
 @objc public class LoginRedefinicaoSenha: NSObject, Codable { 
 
     public var cpf: String?
-    public var email: String?
+//    public var email: String?
 
-    public init(cpf: String?, email: String?) {
+    public init(cpf: String?) {
         self.cpf = cpf
-        self.email = email
+//        self.email = email
     }
 
 }
