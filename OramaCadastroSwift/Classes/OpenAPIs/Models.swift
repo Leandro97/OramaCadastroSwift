@@ -41,6 +41,12 @@ open class Response<T> {
         self.header = header
         self.body = body
     }
+    
+    public init(statusCode: Int, header: [String: String]) {
+        self.statusCode = statusCode
+        self.header = header
+        self.body = nil
+    }
 
     public convenience init(response: HTTPURLResponse, body: T?) {
         let rawHeader = response.allHeaderFields
