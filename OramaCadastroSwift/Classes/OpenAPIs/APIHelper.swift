@@ -67,5 +67,14 @@ public struct APIHelper {
         }
         return destination
     }
+    
+    public static func getErrorType(with error: Error?) -> (Int?, Data?) {
+        guard let errorResponse = error as? ErrorResponse else { return (nil, nil) }
+        
+        switch errorResponse {
+        case .error(let code, let data, _):
+            return (code, data)
+        }
+    }
 }
 
