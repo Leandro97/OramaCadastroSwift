@@ -992,13 +992,16 @@ extension OramaCadastroSwiftAPI {
          - parameter perfilUsuario: (body) Dados para criação ou atualização do perfil
          - parameter completion: completion handler to receive the data and the error objects
          */
-        open class func accountPerfilPut(cpf: String, perfilUsuario: PerfilUsuario, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        open class func accountPerfilPut(cpf: String, perfilUsuario: PerfilUsuario, completion: @escaping ((_ data: Void?,_ error: RegisterError?) -> Void)) {
             accountPerfilPutWithRequestBuilder(cpf: cpf, perfilUsuario: perfilUsuario).execute { (response, error) -> Void in
-                if error == nil {
-                    completion((), error)
-                } else {
-                    completion(nil, error)
-                }
+                let errorType = APIHelper.getErrorType(with: error)
+                let errorCode = errorType.0 ?? 404
+                let formattedError = PerfilUpdateError(rawValue: errorCode)
+                let registerError = RegisterError(code: errorCode, data: errorType.1, description: formattedError?.description)
+                
+                let responseStatusCode = response?.statusCode ?? 200
+                let finalError = !(200 ... 205).contains(responseStatusCode) ? registerError : nil
+                completion(response?.body, finalError)
             }
         }
         
