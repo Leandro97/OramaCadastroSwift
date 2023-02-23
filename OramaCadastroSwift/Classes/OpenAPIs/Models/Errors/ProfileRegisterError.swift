@@ -1,5 +1,5 @@
 //
-//  PerfilRegisterError.swift
+//  ProfileRegisterError.swift
 //  
 //
 //  Created by Leandro Martins de Freitas on 16/02/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum PerfilRegisterError: Int {
+public enum ProfileRegisterError: Int {
     case emailValidationError = 400
     case cpfNotFound = 404
     case duplicatedData = 409

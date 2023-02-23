@@ -1,5 +1,5 @@
 //
-//  IdentificacaoRegisterError.swift
+//  IdentificationRegisterError.swift
 //  
 //
 //  Created by Leandro Martins de Freitas on 15/02/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum IdentificacaoRegisterError: Int {
+public enum IdentificationRegisterError: Int {
     case invalidOrIncompleteData = 400
     case duplicatedData = 409
     case operationLimitReached = 429

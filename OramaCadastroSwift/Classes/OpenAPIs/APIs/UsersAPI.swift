@@ -413,10 +413,10 @@ extension OramaCadastroSwiftAPI {
                 
                 let errorType = APIHelper.getErrorType(with: error)
                 let errorCode = errorType.0 ?? 404
-                let formattedError = IdentificacaoRegisterError(rawValue: errorCode)
+                let formattedError = IdentificationRegisterError(rawValue: errorCode)
                 let registerError = RegisterError(code: errorCode, data: errorType.1, description: formattedError?.description)
                 
-                let responseStatusCode = response?.statusCode ?? 200
+                let responseStatusCode = response?.statusCode ?? 404
                 let finalError = !(200 ... 205).contains(responseStatusCode) ? registerError : nil
                 completion(response?.body, finalError)
             }
@@ -531,13 +531,16 @@ extension OramaCadastroSwiftAPI {
          - parameter assinaturaEletronica: (body) Dados para criação da assinatura eletrônica
          - parameter completion: completion handler to receive the data and the error objects
          */
-        open class func accountPerfilAssinaturaEletronicaPost(cpf: String, assinaturaEletronica: AssinaturaEletronica, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
+        open class func accountPerfilAssinaturaEletronicaPost(cpf: String, assinaturaEletronica: AssinaturaEletronica, completion: @escaping ((_ data: Void?,_ error: RegisterError?) -> Void)) {
             accountPerfilAssinaturaEletronicaPostWithRequestBuilder(cpf: cpf, assinaturaEletronica: assinaturaEletronica).execute { (response, error) -> Void in
-                if error == nil {
-                    completion((), error)
-                } else {
-                    completion(nil, error)
-                }
+                let errorType = APIHelper.getErrorType(with: error)
+                let errorCode = errorType.0 ?? 404
+                let formattedError = ProfileUpdateError(rawValue: errorCode)
+                let registerError = RegisterError(code: errorCode, data: errorType.1, description: formattedError?.description)
+                
+                let responseStatusCode = response?.statusCode ?? 404
+                let finalError = !(200 ... 205).contains(responseStatusCode) ? registerError : nil
+                completion(response?.body, finalError)
             }
         }
         
@@ -616,10 +619,10 @@ extension OramaCadastroSwiftAPI {
             accountPerfilCelularAutenticacaoPostWithRequestBuilder(cpf: cpf).execute { (response, error) -> Void in
                 let errorType = APIHelper.getErrorType(with: error)
                 let errorCode = errorType.0 ?? 404
-                let formattedError = PerfilRegisterError(rawValue: errorCode)
+                let formattedError = ProfileRegisterError(rawValue: errorCode)
                 let registerError = RegisterError(code: errorCode, data: errorType.1, description: formattedError?.description)
                 
-                let responseStatusCode = response?.statusCode ?? 200
+                let responseStatusCode = response?.statusCode ?? 404
                 let finalError = !(200 ... 205).contains(responseStatusCode) ? registerError : nil
                 completion(response?.body, finalError)
             }
@@ -777,10 +780,10 @@ extension OramaCadastroSwiftAPI {
             accountPerfilEmailConfirmacaoPostWithRequestBuilder(cpf: cpf, codigo: codigo).execute { (response, error) -> Void in
                 let errorType = APIHelper.getErrorType(with: error)
                 let errorCode = errorType.0 ?? 404
-                let formattedError = PerfilRegisterError(rawValue: errorCode)
+                let formattedError = ProfileRegisterError(rawValue: errorCode)
                 let registerError = RegisterError(code: errorCode, data: errorType.1, description: formattedError?.description)
                 
-                let responseStatusCode = response?.statusCode ?? 200
+                let responseStatusCode = response?.statusCode ?? 404
                 let finalError = !(200 ... 205).contains(responseStatusCode) ? registerError : nil
                 completion(response?.body, finalError)
             }
@@ -825,10 +828,10 @@ extension OramaCadastroSwiftAPI {
             accountPerfilGetWithRequestBuilder(cpf: cpf, campos: campos).execute { (response, error) -> Void in
                 let errorType = APIHelper.getErrorType(with: error)
                 let errorCode = errorType.0 ?? 404
-                let formattedError = PerfilRegisterError(rawValue: errorCode)
+                let formattedError = ProfileRegisterError(rawValue: errorCode)
                 let registerError = RegisterError(code: errorCode, data: errorType.1, description: formattedError?.description)
                 
-                let responseStatusCode = response?.statusCode ?? 200
+                let responseStatusCode = response?.statusCode ?? 404
                 let finalError = !(200 ... 205).contains(responseStatusCode) ? registerError : nil
                 completion(response?.body, finalError)
             }
@@ -996,10 +999,10 @@ extension OramaCadastroSwiftAPI {
             accountPerfilPutWithRequestBuilder(cpf: cpf, perfilUsuario: perfilUsuario).execute { (response, error) -> Void in
                 let errorType = APIHelper.getErrorType(with: error)
                 let errorCode = errorType.0 ?? 404
-                let formattedError = PerfilUpdateError(rawValue: errorCode)
+                let formattedError = ProfileUpdateError(rawValue: errorCode)
                 let registerError = RegisterError(code: errorCode, data: errorType.1, description: formattedError?.description)
                 
-                let responseStatusCode = response?.statusCode ?? 200
+                let responseStatusCode = response?.statusCode ?? 404
                 let finalError = !(200 ... 205).contains(responseStatusCode) ? registerError : nil
                 completion(response?.body, finalError)
             }
@@ -1109,9 +1112,16 @@ extension OramaCadastroSwiftAPI {
          - parameter cpf: (path) CPF do perfil
          - parameter completion: completion handler to receive the data and the error objects
          */
-        open class func accountPerfilTermosConfirmacaoPost(cpf: String, completion: @escaping ((_ data: Confirmado?,_ error: Error?) -> Void)) {
+        open class func accountPerfilTermosConfirmacaoPost(cpf: String, completion: @escaping ((_ data: Confirmado?,_ error: RegisterError?) -> Void)) {
             accountPerfilTermosConfirmacaoPostWithRequestBuilder(cpf: cpf).execute { (response, error) -> Void in
-                completion(response?.body, error)
+                let errorType = APIHelper.getErrorType(with: error)
+                let errorCode = errorType.0 ?? 404
+                let formattedError = ProfileTermConfirmationError(rawValue: errorCode)
+                let registerError = RegisterError(code: errorCode, data: errorType.1, description: formattedError?.description)
+                
+                let responseStatusCode = response?.statusCode ?? 404
+                let finalError = !(200 ... 205).contains(responseStatusCode) ? registerError : nil
+                completion(response?.body, finalError)
             }
         }
         

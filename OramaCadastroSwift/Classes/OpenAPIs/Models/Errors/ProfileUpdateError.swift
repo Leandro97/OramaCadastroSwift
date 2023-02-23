@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum PerfilUpdateError: Int {
+public enum ProfileUpdateError: Int {
     case invalidOrIncompleteData = 400
     case forbiddenUpdate = 409
     case operationLimitReached = 429
@@ -17,7 +17,7 @@ public enum PerfilUpdateError: Int {
         case .invalidOrIncompleteData:
             return "Dados inválidos ou incompletos."
         case .forbiddenUpdate:
-            return "Atualização de perfil não permitida."
+            return "Atualização de não permitida."
         case .operationLimitReached:
             return "Limite de requisições alcançado. Tente novamente mais tarde."
         }
